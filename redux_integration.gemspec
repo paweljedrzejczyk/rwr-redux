@@ -6,7 +6,7 @@ require 'react_webpack_rails/redux_integration/version'
 Gem::Specification.new do |spec|
   spec.name          = 'rwr-redux'
   spec.version       = ReactWebpackRails::ReduxIntegration::VERSION
-  spec.authors       = ['Rafał Gawlik']
+  spec.authors       = ['Kacper Goliński', 'Rafał Gawlik']
   spec.email         = ['react@netguru.co']
 
   spec.summary       = 'Redux integration for react_webpack_rails'
