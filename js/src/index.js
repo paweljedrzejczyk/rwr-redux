@@ -1,4 +1,3 @@
-import { integrationsManager } from 'react-webpack-rails';
 import version from './version';
 
 class RWRRedux {
@@ -9,7 +8,6 @@ class RWRRedux {
   get integrationWrapper() {
     return {};
   }
-  run() {}
 }
 
 export default new RWRRedux;
