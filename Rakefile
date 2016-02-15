@@ -14,7 +14,7 @@ namespace :test do
 
   desc 'Run gem tests'
   task :gem do
-    sh %Q(bundle exec rspec spec/rwr_redux.rb)
+    sh %Q(bundle exec rspec spec/rwr-redux.rb)
   end
 end
 
