@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'react_webpack_rails/alt_integration/version'
+require 'react_webpack_rails/redux_integration/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'rwr-alt'
-  spec.version       = ReactWebpackRails::AltIntegration::VERSION
+  spec.name          = 'rwr-redux'
+  spec.version       = ReactWebpackRails::ReduxIntegration::VERSION
   spec.authors       = ['Rafał Gawlik']
   spec.email         = ['react@netguru.co']
 
-  spec.summary       = 'Alt integration for react_webpack_rails'
+  spec.summary       = 'Redux integration for react_webpack_rails'
   spec.description   = ''
   spec.homepage      = ''
   spec.license       = 'MIT'

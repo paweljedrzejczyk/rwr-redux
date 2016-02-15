@@ -1,5 +1,5 @@
 module ReactWebpackRails
-  module AltIntegration
+  module ReduxIntegration
     module ViewHelpers
     end
   end

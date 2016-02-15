@@ -1,7 +1,7 @@
 import { integrationsManager } from 'react-webpack-rails';
 import version from './version';
 
-class RWRAlt {
+class RWRRedux {
   constructor() {
     this.version = version;
   }
@@ -12,4 +12,4 @@ class RWRAlt {
   run() {}
 }
 
-export default new RWRAlt;
+export default new RWRRedux;

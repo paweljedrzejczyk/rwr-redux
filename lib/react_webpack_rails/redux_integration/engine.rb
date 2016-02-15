@@ -1,5 +1,5 @@
 module ReactWebpackRails
-  module AltIntegration
+  module ReduxIntegration
     class Engine < ::Rails::Engine
     end
   end

@@ -1,5 +1,5 @@
 module ReactWebpackRails
-  module AltIntegration
+  module ReduxIntegration
     VERSION = '0.1.0'
   end
 end
