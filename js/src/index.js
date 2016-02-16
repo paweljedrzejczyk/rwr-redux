@@ -10,8 +10,9 @@ import { isFunction, isReduxStore } from './utils/validators';
 class RWRRedux {
   constructor() {
     this.version = version;
-    this.stores = {};
+    this.registeredStores = {};
     this.mountedStores = {};
+    this.defaultStore = null;
     this.containers = {};
 
     this.registerStore = this.registerStore.bind(this);
@@ -28,20 +29,25 @@ class RWRRedux {
 
   registerStore(name, store) {
     isFunction(store, `Error when registering '${name}' store: must be a function.`);
-    this.stores[name] = store;
+    this.registeredStores[name] = store;
   }
 
   mountStore(name, props) {
-    const store = this.stores[name];
+    const store = this.registeredStores[name];
     isFunction(store, `Error when mounting '${name}' store: must be a function.`);
 
     const storeObject = store(props);
     isReduxStore(storeObject, `Error when mounting '${name}' store: must be a valid Redux store.`);
     this.mountedStores[name] = storeObject;
+    this.defaultStore = storeObject;
   }
 
   getStore(name) {
-    return this.mountedStores[name];
+    if (name) {
+      return this.mountedStores[name];
+    } else {
+      return this.defaultStore;
+    }
   }
 
   registerContainer(name, container) {

@@ -19,7 +19,7 @@ const validStore = function(initialState) {
 
 describe('RWRRedux', function () {
   afterEach(function() {
-    subject.stores = {};
+    subject.registeredStores = {};
     subject.mountedStores = {};
     subject.containers = {};
     expect.restoreSpies();
@@ -33,7 +33,7 @@ describe('RWRRedux', function () {
 
   describe('.constructor', function() {
     it('intializes empty stores, mountedStores and containers dictionaries', function () {
-      expect(subject.stores).toEqual({});
+      expect(subject.registeredStores).toEqual({});
       expect(subject.mountedStores).toEqual({});
       expect(subject.containers).toEqual({});
     });
@@ -51,7 +51,7 @@ describe('RWRRedux', function () {
     it('adds valid store to the storage', function() {
       subject.registerStore('ValidStore', validStore);
 
-      expect(subject.stores.ValidStore).toBe(validStore);
+      expect(subject.registeredStores.ValidStore).toBe(validStore);
     });
   });
 
@@ -71,12 +71,14 @@ describe('RWRRedux', function () {
       .toThrow(/Error when mounting 'InvalidStore' store: must be a valid Redux store./);
     });
 
-    it('ads store to mountedStores storage', function() {
+    it('adds store to mountedStores storage and save as defaultStore', function() {
       subject.registerStore('ValidStore', validStore);
       const initialState = {};
       subject.mountStore('ValidStore', initialState);
+      const storeObject = validStore(initialState);
 
-      expect(subject.mountedStores.ValidStore).toEqual(validStore(initialState));
+      expect(subject.mountedStores.ValidStore).toEqual(storeObject);
+      expect(subject.defaultStore).toEqual(storeObject)
     });
   });
 
@@ -89,6 +91,13 @@ describe('RWRRedux', function () {
       subject.registerStore('ValidStore', validStore);
       subject.mountStore('ValidStore', {});
       expect(subject.getStore('ValidStore')).toEqual(validStore({}));
+    });
+
+    it('returns default store when store\'s name is not given', function() {
+      subject.registerStore('ValidStore', validStore);
+      subject.mountStore('ValidStore', {});
+
+      expect(subject.getStore()).toEqual(validStore({}));
     });
   });
 
