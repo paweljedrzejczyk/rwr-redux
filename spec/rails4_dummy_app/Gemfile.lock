@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:netguru/react_webpack_rails.git
+  revision: cebcb69a01a2e99bf3b7dc508bed3f7f3d2bbf73
+  specs:
+    react_webpack_rails (0.2.0)
+      rails (>= 3.2)
+
 PATH
   remote: ../..
   specs:
@@ -125,8 +132,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
-    react_webpack_rails (0.2.0)
-      rails (>= 3.2)
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.1)
@@ -199,7 +204,7 @@ DEPENDENCIES
   jquery-rails
   pry
   rails (= 4.2.4)
-  react_webpack_rails
+  react_webpack_rails!
   rspec-rails
   rwr-redux!
   sass-rails (~> 5.0)
