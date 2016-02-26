@@ -1,3 +1,11 @@
 <%= redux_store 'MyStore', { counter: @counter_initial_value } %>
 <%= redux_container 'DevTools', store_name: 'MyStore' %>
-<%= redux_container 'CounterApp', store_name: 'MyStore' %>
+
+<div id="first-counter-app">
+  <%= redux_container 'CounterApp', store_name: 'MyStore' %>
+</div>
+
+<div id="second-counter-app">
+  <!-- this container will use MyStore as a default -->
+  <%= redux_container 'CounterApp' %>
+</div>
