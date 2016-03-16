@@ -7,9 +7,9 @@ This integration allows to use redux state containers in a diffrent part of rail
 ## Setup
 * Add `rwr-redux` to your Gemfile:
 
- ```
- gem 'rwr-redux'
- ```
+```
+gem 'rwr-redux'
+```
 
 * Install rwr-redux package:
 
@@ -53,6 +53,20 @@ If you have more than one store in a view, you can specify `store_name`:
 
 ```erb
 <%= redux_container 'MyContainerName', store_name: 'MyStoreName' %>
+```
+
+### using redux DevTools
+
+register in `react/index.js`:
+
+```js
+import DevTools from './containers/DevTools';
+RWRRedux.registerContainer('DevTools', DevTools);
+```
+use in Rails view:
+
+```erb
+<%= redux_container 'DevTools' %>
 ```
 
 ## Contributing
