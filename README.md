@@ -55,7 +55,9 @@ If you have more than one store in a view, you can specify `store_name`:
 <%= redux_container 'MyContainerName', store_name: 'MyStoreName' %>
 ```
 
-### using redux DevTools
+### using redux [DevTools](https://github.com/gaearon/redux-devtools)
+
+**Use DevTools only in a development, below code has to be excluded in production.**
 
 register in `react/index.js`:
 
@@ -63,6 +65,7 @@ register in `react/index.js`:
 import DevTools from './containers/DevTools';
 RWRRedux.registerContainer('DevTools', DevTools);
 ```
+
 use in Rails view:
 
 ```erb
