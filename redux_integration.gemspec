@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.email         = ['react@netguru.co']
 
   spec.summary       = 'Redux integration for react_webpack_rails'
-  spec.description   = ''
-  spec.homepage      = ''
+  spec.description   = 'Redux integration for react_webpack_rails'
+  spec.homepage      = 'https://github.com/netguru/rwr-redux'
   spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
