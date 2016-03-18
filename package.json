@@ -1,7 +1,7 @@
 {
   "name": "rwr-redux",
-  "version": "0.1.0-alpha1",
-  "description": "",
+  "version": "0.1.1",
+  "description": "Redux integration for react_webpack_rails",
   "main": "js/lib/index.js",
   "files": [
     "js/lib"
@@ -12,16 +12,16 @@
     "test": "mocha js/test --ui bdd --recursive --require babel-core/register"
   },
   "repository": {
-    "type": "",
-    "url": ""
+    "type": "git",
+    "url": "git+https://github.com/netguru/rwr-redux.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "",
+  "keywords": ["redux", "react-redux", "react", "rails","react_webpack_rails", "rwr"],
+  "author": "Kacper Goliński",
+  "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/netguru/rwr-redux/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/netguru/rwr-redux",
   "peerDependencies": {
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
