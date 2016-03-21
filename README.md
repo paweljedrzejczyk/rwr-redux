@@ -2,13 +2,16 @@ rwr-redux
 ====
 [Redux.js](http://redux.js.org/) integration plugin for [react_webpack_rails](https://github.com/netguru/react_webpack_rails).
 
-This integration allows to use redux state containers in a diffrent part of rails views.
+It allows you to use Redux state containers in a diffrent part of Rails views. Thanks to this gem you can use multiple components (Redux containers) in one page. They can easily access the same store and have their state synced.
+
+[Example](https://github.com/netguru/rwr-redux/tree/master/spec/rails4_dummy_app/app/react) app.
 
 ## Setup
 * Add `rwr-redux` to your Gemfile:
 
 ```
 gem 'rwr-redux'
+
 ```
 
 * Install rwr-redux package:
@@ -19,11 +22,15 @@ $ npm install --save rwr-redux
 
 ## Usage
 
+First of all, you have to register your store and containers in `react/index.js`. Then you can use them in a Rails view using provided helpers.
+When page is loaded, your container component is wrapped with [`<Provider>`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) component and will have access to defined store.
+
 ### register store and components in react/index.js
 
 Register store:
 
 ```js
+
 import Store from './store';
 RWRRedux.registerStore('MyStoreName', Store);
 ```
