@@ -9,15 +9,14 @@ It allows you to use Redux state containers in a diffrent part of Rails views. T
 ## Setup
 * Add `rwr-redux` to your Gemfile:
 
-```
+```ruby
 gem 'rwr-redux'
-
 ```
 
-* Install rwr-redux package:
+* Install `rwr-redux` and `redux` packages:
 
 ```
-$ npm install --save rwr-redux
+$ npm install --save redux react-redux rwr-redux
 ```
 
 ## Usage
