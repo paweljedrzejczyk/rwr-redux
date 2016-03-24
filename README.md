@@ -41,6 +41,16 @@ import Container from './containers/MyContainerName';
 RWRRedux.registerContainer('MyContainerName', Container);
 ```
 
+### store
+
+Registered store has to be a function which accetps **initial state** as an argument and returns store object:
+
+```js
+export default function configureStore(initialState) {
+  return createStore(rootReducer, initialState);
+}
+```
+
 ### use registered store and componetns in Rails view
 
 Define store with initial state:
