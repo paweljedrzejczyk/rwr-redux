@@ -84,7 +84,7 @@ Import `push` method from react-router-redux:
 import { push } from 'react-router-redux';
 ```
 
-And now you can dispath an action with navigation event:
+And now you can dispatch an action with navigation event:
 ```jsx
 this.props.dispatch(push(path));
 ```
