@@ -13,7 +13,15 @@ module ReactWebpackRails
 
       def redux_container(name, options = {})
         store_name = options.delete(:store_name)
-        react_element('redux-container', { name: name, storeName: store_name }, options)
+
+        if server_side(options.delete(:server_side))
+          result_string = NodeIntegrationRunner.new('redux-container', name: name, storeName: store_name).run
+          react_element('redux-container', { name: name, storeName: store_name }, options) do
+            result_string.html_safe
+          end
+        else
+          react_element('redux-container', { name: name, storeName: store_name }, options)
+        end
       end
 
       private

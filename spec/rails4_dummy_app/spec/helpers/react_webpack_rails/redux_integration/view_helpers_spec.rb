@@ -93,5 +93,30 @@ describe ReactWebpackRails::ReduxIntegration::ViewHelpers, type: :helper do
         helper.redux_container('ContainerName')
       end
     end
+
+    context 'when server_side is true' do
+      let(:node_runner) { instance_double('ReactWebpackRails::NodeIntegrationRunner') }
+      let(:result_string) { '<div>result</div>' }
+      let(:arguments) { ['redux-container', { name: 'ContainerName', storeName: nil }, {}] }
+
+      before do
+        allow(ReactWebpackRails::NodeIntegrationRunner).to receive(:new) { node_runner }
+        allow(node_runner).to receive(:run)
+      end
+
+      it 'NodeIntegrationRunner instance and #react_element with proper arguments' do
+        expect(ReactWebpackRails::NodeIntegrationRunner).to receive(:new)
+          .with('redux-container', name: 'ContainerName', storeName: nil)
+          .and_return(node_runner)
+
+        expect(node_runner).to receive(:run).and_return(result_string)
+
+        expect(helper).to receive(:react_element).with(*arguments) do |*args, &block|
+          expect(block.call).to eq(result_string.html_safe)
+        end
+
+        helper.redux_container('ContainerName', server_side: true)
+      end
+    end
   end
 end
