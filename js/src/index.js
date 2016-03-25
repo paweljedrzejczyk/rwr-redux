@@ -79,12 +79,16 @@ class RWRRedux {
 
   renderContainerToString(name, storeName) {
     const rootComponent = this.createRootComponent(name, storeName);
-    renderToString(rootComponent);
+    return renderToString(rootComponent);
   }
 
   get storeIntegrationWrapper() {
     return {
       mount: function _mount(_, payload) {
+        this.mountStore(payload.name, payload.props);
+      }.bind(this),
+
+      nodeRun: function _mount(payload) {
         this.mountStore(payload.name, payload.props);
       }.bind(this)
     }

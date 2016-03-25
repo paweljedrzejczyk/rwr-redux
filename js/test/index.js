@@ -174,15 +174,27 @@ describe('RWRRedux', function () {
     });
   });
 
-  describe('#storeIntegrationWrapper.mount', function() {
-    it('calls #mountStore function', function() {
-      const mountStoreSpy = spyOn(subject, 'mountStore');
-      const payload = { name: 'StoreName', props: { fake: 'props' } };
+  describe('#storeIntegrationWrapper', function() {
+    const payload = { name: 'StoreName', props: { fake: 'props' } };
 
-      subject.storeIntegrationWrapper.mount('', payload)
+    describe('mount', function() {
+      it('calls #mountStore function', function() {
+        const mountStoreSpy = spyOn(subject, 'mountStore');
+        subject.storeIntegrationWrapper.mount('', payload)
 
-      expect(mountStoreSpy.calls.length).toEqual(1);
-      expect(mountStoreSpy).toHaveBeenCalledWith(payload.name, payload.props);
+        expect(mountStoreSpy.calls.length).toEqual(1);
+        expect(mountStoreSpy).toHaveBeenCalledWith(payload.name, payload.props);
+      });
+    });
+
+    describe('nodeRun', function() {
+      it('calls #mountStore function', function() {
+        const mountStoreSpy = spyOn(subject, 'mountStore');
+        subject.storeIntegrationWrapper.nodeRun(payload)
+
+        expect(mountStoreSpy.calls.length).toEqual(1);
+        expect(mountStoreSpy).toHaveBeenCalledWith(payload.name, payload.props);
+      });
     });
   });
 });
