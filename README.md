@@ -4,7 +4,9 @@ rwr-redux
 
 It allows you to use Redux state containers in a diffrent part of Rails views. Thanks to this gem you can use multiple components (Redux containers) in one page. They can easily access the same store and have their state synced.
 
-[Example](https://github.com/netguru/rwr-redux/tree/master/spec/rails4_dummy_app/app/react) app.
+#### Guides and Examples
+* how to use Redux and react-router in Rails app: [guide](https://github.com/netguru/rwr-redux/blob/master/docs/rails-redux-router.md) and [example](https://github.com/caspg/rails-react-examples/tree/master/redux-router).
+
 
 ## Setup
 * Add `rwr-redux` to your Gemfile:
