@@ -2,7 +2,13 @@ module ReactWebpackRails
   module ReduxIntegration
     module ViewHelpers
       def redux_store(name, raw_props = {}, options = {})
-        react_element('redux-store', { name: name, props: serialize_props(raw_props) }, options)
+        props = serialize_props(raw_props)
+
+        if server_side(options.delete(:server_side))
+          NodeIntegrationRunner.new('redux-store', name: name, props: props).run
+        end
+
+        react_element('redux-store', { name: name, props: props }, options)
       end
 
       def redux_container(name, options = {})

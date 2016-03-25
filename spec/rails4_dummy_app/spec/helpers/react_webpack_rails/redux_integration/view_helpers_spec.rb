@@ -40,6 +40,35 @@ describe ReactWebpackRails::ReduxIntegration::ViewHelpers, type: :helper do
         helper.redux_store('StoreName', foo_bar: 'baz')
       end
     end
+
+    context 'when server_side is true' do
+      let(:node_runner) { instance_double('ReactWebpackRails::NodeIntegrationRunner') }
+
+      before do
+        allow(ReactWebpackRails::NodeIntegrationRunner).to receive(:new) { node_runner }
+        allow(node_runner).to receive(:run)
+      end
+
+      it 'calls NodeIntegrationRunner instance with proper arguments' do
+        expect(ReactWebpackRails::NodeIntegrationRunner).to receive(:new)
+          .with('redux-store', name: 'StoreName', props: { 'foo' => 'bar' })
+          .and_return(node_runner)
+          .once
+
+        expect(node_runner).to receive(:run).once
+
+        helper.redux_store('StoreName', { foo: 'bar' }, server_side: true)
+      end
+
+      it 'calls #react_element with proper params' do
+        expect(helper)
+          .to receive(:react_element)
+          .with('redux-store', { name: 'StoreName', props: { 'foo' => 'bar' } }, {})
+          .once
+
+        helper.redux_store('StoreName', { foo: 'bar' }, server_side: true)
+      end
+    end
   end
 
   describe '#redux_container' do
