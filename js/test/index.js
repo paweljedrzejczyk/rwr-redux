@@ -178,7 +178,7 @@ describe('RWRRedux', function () {
     const payload = { name: 'StoreName', props: { fake: 'props' } };
 
     describe('mount', function() {
-      it('calls #mountStore function', function() {
+      it('calls #mountStore', function() {
         const mountStoreSpy = spyOn(subject, 'mountStore');
         subject.storeIntegrationWrapper.mount('', payload)
 
@@ -188,12 +188,47 @@ describe('RWRRedux', function () {
     });
 
     describe('nodeRun', function() {
-      it('calls #mountStore function', function() {
+      it('calls #mountStore', function() {
         const mountStoreSpy = spyOn(subject, 'mountStore');
         subject.storeIntegrationWrapper.nodeRun(payload)
 
         expect(mountStoreSpy.calls.length).toEqual(1);
         expect(mountStoreSpy).toHaveBeenCalledWith(payload.name, payload.props);
+      });
+    });
+  });
+
+  describe('#containerIntegrationWrapper', function() {
+    const node = { nodeType: 1, nodeName: 'DIV' };
+    const payload = { name: 'ContainerName', storeName: 'StoreName' };
+
+    describe('mount', function() {
+      it('calls #renderContainer', function() {
+        const mountSpy = spyOn(subject, 'renderContainer');
+        subject.containerIntegrationWrapper.mount(node, payload);
+
+        expect(mountSpy.calls.length).toEqual(1);
+        expect(mountSpy).toHaveBeenCalledWith(payload.name, node, payload.storeName);
+      });
+    });
+
+    describe('unmount', function() {
+      it('calls #unmountContainer', function() {
+        const unmountSpy = spyOn(subject, 'unmountContainer');
+        subject.containerIntegrationWrapper.unmount(node);
+
+        expect(unmountSpy.calls.length).toEqual(1);
+        expect(unmountSpy).toHaveBeenCalledWith(node);
+      });
+    });
+
+    describe('nodeRun', function() {
+      it('calls #renderContainerToString', function() {
+        const nodeRunSpy = spyOn(subject, 'renderContainerToString');
+        subject.containerIntegrationWrapper.nodeRun(payload);
+
+        expect(nodeRunSpy.calls.length).toEqual(1);
+        expect(nodeRunSpy).toHaveBeenCalledWith(payload.name, payload.storeName);
       });
     });
   });

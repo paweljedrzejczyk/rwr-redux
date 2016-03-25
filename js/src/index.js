@@ -105,7 +105,7 @@ class RWRRedux {
       }.bind(this),
 
       nodeRun: function _prerender(payload) {
-        return this.renderContainerToString(payload.name);
+        return this.renderContainerToString(payload.name, payload.storeName);
       }.bind(this)
     }
   }
