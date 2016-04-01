@@ -1,10 +1,12 @@
-import { isFunction, isReduxStore } from './utils/validators';
+import { isFunction, isReduxStore } from '../utils/validators';
 
 class ReduxStore {
   constructor() {
     this.registeredStores = {};
     this.mountedStores = {};
     this.defaultStore = null;
+
+    this.registerStore = this.registerStore.bind(this);
   }
 
   registerStore(name, store) {
@@ -30,7 +32,7 @@ class ReduxStore {
     return this.defaultStore;
   }
 
-  get storeIntegrationWrapper() {
+  get integrationWrapper() {
     return {
       mount: function _mount(_, payload) {
         this.mountStore(payload.name, payload.props);

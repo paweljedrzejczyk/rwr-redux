@@ -9,6 +9,8 @@ import ReduxStore from './redux-store';
 class ReduxRouter {
   constructor() {
     this.routes = {};
+
+    this.registerRoutes = this.registerRoutes.bind(this);
   }
 
   registerRoutes(name, routes) {
