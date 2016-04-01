@@ -1,6 +1,7 @@
 import { createElement } from 'react';
 import { Provider } from 'react-redux';
 import { render, unmountComponentAtNode } from 'react-dom';
+import { renderToString } from 'react-dom/server';
 
 import ReduxStore from './redux-store';
 
@@ -40,6 +41,13 @@ class ReduxContainer {
     unmountComponentAtNode(node);
   }
 
+  renderContainerToString(name, storeName) {
+    const rootComponent = this.createRootComponent(name, storeName);
+    const result = renderToString(rootComponent);
+
+    return JSON.stringify({ body: result });
+  }
+
   get integrationWrapper() {
     return {
       mount: function _mount(node, payload) {
@@ -48,6 +56,11 @@ class ReduxContainer {
 
       unmount: function _unmount(node) {
         this.unmountContainer(node);
+      }.bind(this),
+
+      nodeRun: function _prerender(payload) {
+        const { name, storeName } = payload;
+        return this.renderContainerToString(name, storeName);
       }.bind(this),
     };
   }
