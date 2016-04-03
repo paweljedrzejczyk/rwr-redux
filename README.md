@@ -2,7 +2,7 @@ rwr-redux
 ====
 [Redux.js](http://redux.js.org/) integration plugin for [react_webpack_rails](https://github.com/netguru/react_webpack_rails).
 
-It allows you to use Redux state containers in a diffrent part of Rails views. Thanks to this gem you can use multiple components (Redux containers) in one page. They can easily access the same store and have their state synced.
+It allows you to use Redux state containers in a different part of Rails views. Thanks to this gem you can use multiple components (Redux containers) in one page. They can easily access the same store and have their state synced.
 
 #### Guides and Examples
 * basic react redux rails example: [app](https://github.com/caspg/rails-react-examples/tree/master/basic-redux)
@@ -46,7 +46,7 @@ RWRRedux.registerContainer('MyContainerName', Container);
 
 ### store
 
-Registered store has to be a function which accetps **initial state** as an argument and returns store object:
+Registered store has to be a function which accepts **initial state** as an argument and returns store object:
 
 ```js
 export default function configureStore(initialState) {
@@ -54,7 +54,7 @@ export default function configureStore(initialState) {
 }
 ```
 
-### use registered store and componetns in Rails view
+### use registered store and components in Rails view
 
 Define store with initial state:
 
