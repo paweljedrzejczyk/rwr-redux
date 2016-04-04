@@ -1,3 +1,5 @@
+require 'react_webpack_rails/redux_integration/services/redux_element'
+
 module ReactWebpackRails
   module ReduxIntegration
     module ViewHelpers
@@ -12,33 +14,19 @@ module ReactWebpackRails
       end
 
       def redux_container(name, options = {})
-        store_name = options.delete(:store_name)
-        payload = { name: name, storeName: store_name }
+        container = Services::ReduxElement.new('redux-container', name, options)
 
-        if server_side(options.delete(:server_side))
-          result_string = NodeIntegrationRunner.new('redux-container', payload).run
-          result = JSON.parse(result_string)
-
-          react_element('redux-container', payload, options) do
-            result['body'].html_safe
-          end
-        else
-          react_element('redux-container', payload, options)
+        react_element('redux-container', container.payload, container.options) do
+          container.result['body'].html_safe
         end
       end
 
       def redux_router(name, options = {})
-        store_name = options.delete(:store_name)
-        payload = { name: name, storeName: store_name }
+        router = Services::ReduxElement.new('redux-router', name, options, request.path)
+        result = handle_response_code(router.result, name, request.path)
 
-        if server_side(options.delete(:server_side))
-          result = server_side_router(payload)
-
-          react_element('redux-router', payload, options) do
-            result
-          end
-        else
-          react_element('redux-router', payload, options)
+        react_element('redux-router', router.payload, router.options) do
+          result
         end
       end
 
@@ -50,19 +38,14 @@ module ReactWebpackRails
         ReactWebpackRails::Services::CamelizeKeys.call(props)
       end
 
-      def server_side_router(payload)
-        path = request.path
-        server_payload = payload.merge(path: path)
-        result_string = NodeIntegrationRunner.new('redux-router', server_payload).run
-        result = JSON.parse(result_string)
-
+      def handle_response_code(result, name, path)
         case result['code']
         when 200
           result['body'].html_safe
         when 302
           controller.redirect_to(result['redirectUri'])
         else
-          fail ActionController::RoutingError, routing_error(payload[:name], path)
+          fail ActionController::RoutingError, routing_error(name, path)
         end
       end
 
