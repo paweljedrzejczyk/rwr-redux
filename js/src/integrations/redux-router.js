@@ -42,7 +42,7 @@ class ReduxRouter {
     render(rootRouter, node);
   }
 
-  renderContainerToString(name, storeName, path) {
+  renderRouterToString(name, storeName, path) {
     const routes = this.getRoutes(name);
     const memoryHistory = createMemoryHistory(path);
     const store = ReduxStore.getStore(storeName);
@@ -87,7 +87,7 @@ class ReduxRouter {
 
       nodeRun: function _nodeRun(payload) {
         const { name, storeName, path } = payload;
-        return this.renderContainerToString(name, storeName, path);
+        return this.renderRouterToString(name, storeName, path);
       }.bind(this),
     };
   }

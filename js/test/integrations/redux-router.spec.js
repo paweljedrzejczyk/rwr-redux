@@ -1,5 +1,6 @@
 import expect, { spyOn } from 'expect';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Route } from 'react-router';
 
 import subject from '../../src/integrations/redux-router';
@@ -42,20 +43,74 @@ describe('ReduxRouter', function () {
 
   describe('#createRootRouter', function () {
     it('calls syncHistoryWithStore and createElement', function () {
+      // TODO
     });
   });
 
-  describe('#unmountRouter', function () {});
+  describe('#unmountRouter', function () {
+    it('calls #unmountComponentAtNode', function () {
+      const node = { nodeType: 1, nodeName: 'DIV' };
+      const unmountSpy = spyOn(ReactDOM, 'unmountComponentAtNode');
 
-  describe('#renderRouter', function () {});
+      subject.unmountRouter(node);
 
-  describe('#renderContainerToString', function () {});
+      expect(unmountSpy.calls.length).toEqual(1);
+      expect(unmountSpy).toHaveBeenCalledWith(node);
+    });
+  });
+
+  describe('#renderRouter', function () {
+    it('calls createRootRouter and render functions', function () {
+      const subjectSpy = spyOn(subject, 'createRootRouter').andReturn('router');
+      const reactSpy = spyOn(ReactDOM, 'render');
+
+      subject.renderRouter('node', 'RouterName', 'StoreName');
+
+      expect(subjectSpy.calls.length).toEqual(1);
+      expect(subjectSpy).toHaveBeenCalledWith('RouterName', 'StoreName');
+      expect(reactSpy.calls.length).toEqual(1);
+      expect(reactSpy).toHaveBeenCalledWith('router', 'node');
+    });
+  });
+
+  describe('#renderContainerToString', function () {
+    // TODO
+  });
 
   describe('#integrationWrapper', function () {
-    describe('#mount', function () {});
+    const node = { nodeType: 1, nodeName: 'DIV' };
+    const payload = { name: 'RouterName', storeName: 'StoreName', path: '/path' };
 
-    describe('#unmount', function () {});
+    describe('#mount', function () {
+      it('calls #renderRouter', function () {
+        const { name, storeName } = payload;
+        const mountSpy = spyOn(subject, 'renderRouter');
+        subject.integrationWrapper.mount(node, payload);
 
-    describe('#nodeRun', function () {});
+        expect(mountSpy.calls.length).toEqual(1);
+        expect(mountSpy).toHaveBeenCalledWith(node, name, storeName);
+      });
+    });
+
+    describe('#unmount', function () {
+      it('calls #unmountRouter', function () {
+        const unmountSpy = spyOn(subject, 'unmountRouter');
+        subject.integrationWrapper.unmount(node);
+
+        expect(unmountSpy.calls.length).toEqual(1);
+        expect(unmountSpy).toHaveBeenCalledWith(node);
+      });
+    });
+
+    describe('#nodeRun', function () {
+      it('calls #renderRouterToString', function () {
+        const { name, storeName, path } = payload;
+        const nodeRunSpy = spyOn(subject, 'renderRouterToString');
+        subject.integrationWrapper.nodeRun(payload);
+
+        expect(nodeRunSpy.calls.length).toEqual(1);
+        expect(nodeRunSpy).toHaveBeenCalledWith(name, storeName, path);
+      });
+    });
   });
 });
