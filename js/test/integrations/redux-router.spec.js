@@ -4,10 +4,18 @@ import ReactDOM from 'react-dom';
 import subject from '../../src/integrations/redux-router';
 import { routes, registerRoutesAndMountStore } from '../helpers/redux-router';
 
+function resetConstructor() {
+  subject.routes = {};
+  expect.restoreSpies();
+}
+
 describe('ReduxRouter', function () {
+  before(function () {
+    resetConstructor();
+  });
+
   afterEach(function () {
-    subject.routes = {};
-    expect.restoreSpies();
+    resetConstructor();
   });
 
   describe('.constructor', function () {

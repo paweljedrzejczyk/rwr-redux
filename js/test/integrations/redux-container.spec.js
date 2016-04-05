@@ -18,10 +18,18 @@ const store = function (initialState) {
   return createStore(fakeReducer, initialState);
 };
 
+function resetConstructor() {
+  subject.containers = {};
+  expect.restoreSpies();
+}
+
 describe('ReduxContainer', function () {
+  before(function () {
+    resetConstructor();
+  });
+
   afterEach(function () {
-    subject.containers = {};
-    expect.restoreSpies();
+    resetConstructor();
   });
 
   describe('.constructor', function () {

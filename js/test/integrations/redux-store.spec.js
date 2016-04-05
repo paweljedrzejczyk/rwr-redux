@@ -8,13 +8,21 @@ const validStore = function (initialState) {
   return createStore(fakeReducer, initialState);
 };
 
-describe('ReduxStore', function () {
-  afterEach(function () {
-    subject.registeredStores = {};
-    subject.mountedStores = {};
-    subject.defaultStore = null;
+function resetConstructor() {
+  subject.registeredStores = {};
+  subject.mountedStores = {};
+  subject.defaultStore = null;
 
-    expect.restoreSpies();
+  expect.restoreSpies();
+}
+
+describe('ReduxStore', function () {
+  before(function () {
+    resetConstructor();
+  });
+
+  afterEach(function () {
+    resetConstructor();
   });
 
   describe('.constructor', function () {
