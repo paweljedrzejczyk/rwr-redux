@@ -1,17 +1,24 @@
 import expect, { spyOn } from 'expect';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route } from 'react-router';
+import { Route, Redirect } from 'react-router';
+import { createStore, combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
 import subject from '../../src/integrations/redux-router';
+import ReduxStore from '../../src/integrations/redux-store';
 
 class App extends React.Component {
   render() {
-    return <div>App</div>;
+    return <div>App Component</div>;
   }
 }
 
-const routes = (<Route path="/" component={App} />);
+const routes = (
+  <Route path="/" component={App}>
+    <Redirect from="home" to="/" />
+  </Route>
+);
 
 describe('ReduxRouter', function () {
   afterEach(function () {
@@ -73,8 +80,53 @@ describe('ReduxRouter', function () {
     });
   });
 
-  describe('#renderContainerToString', function () {
-    // TODO
+  describe('#renderRouterToString', function () {
+    const fakeReducer = combineReducers({ routing: routerReducer });
+    const store = function (initialState) {
+      return createStore(fakeReducer, initialState);
+    };
+
+    const renderRouterToString = (path) => {
+      const result = subject.renderRouterToString('RoutesName', 'StoreName', path);
+      return JSON.parse(result);
+    };
+
+    beforeEach(function () {
+      subject.registerRoutes('RoutesName', routes);
+      ReduxStore.registerStore('StoreName', store);
+      ReduxStore.mountStore('StoreName', {});
+    });
+
+    context('when router can match location', function () {
+      it('returns string component and 200 status code', function () {
+        const validPath = '/';
+        const result = renderRouterToString(validPath);
+
+        expect(result.code).toEqual(200);
+        expect(result.body).toInclude('App Component');
+      });
+    });
+
+    context('when router returns redirectLocation', function () {
+      it('returns 302 status code and redirectUri', function () {
+        const redirectPath = '/home';
+        const result = renderRouterToString(redirectPath);
+
+        expect(result.code).toEqual(302);
+        expect(result.body).toEqual('');
+        expect(result.redirectUri).toEqual('/');
+      });
+    });
+
+    context('when router can not match location', function () {
+      it('returns 404 status code', function () {
+        const invalidPath = '/path';
+        const result = renderRouterToString(invalidPath);
+
+        expect(result.code).toEqual(404);
+        expect(result.body).toEqual('');
+      });
+    });
   });
 
   describe('#integrationWrapper', function () {
