@@ -8,11 +8,14 @@ class RWRRedux {
     this.version = version;
 
     this.registerStore = ReduxStore.registerStore;
-    this.registerContainer = ReduxContainer.registerContainer;
-    this.registerRoutes = ReduxRouter.registerRoutes;
-
+    this.mountStore = ReduxStore.mountStore;
+    this.getStore = ReduxStore.getStore;
     this.storeIntegrationWrapper = ReduxStore.integrationWrapper;
+
+    this.registerContainer = ReduxContainer.registerContainer;
     this.containerIntegrationWrapper = ReduxContainer.integrationWrapper;
+
+    this.registerRoutes = ReduxRouter.registerRoutes;
     this.routerIntegrationWrapper = ReduxRouter.integrationWrapper;
   }
 }
