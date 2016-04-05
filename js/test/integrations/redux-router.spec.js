@@ -1,24 +1,8 @@
 import expect, { spyOn } from 'expect';
-import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Redirect } from 'react-router';
-import { createStore, combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
 
 import subject from '../../src/integrations/redux-router';
-import ReduxStore from '../../src/integrations/redux-store';
-
-class App extends React.Component {
-  render() {
-    return <div>App Component</div>;
-  }
-}
-
-const routes = (
-  <Route path="/" component={App}>
-    <Redirect from="home" to="/" />
-  </Route>
-);
+import { routes, registerRoutesAndMountStore } from '../helpers/redux-router';
 
 describe('ReduxRouter', function () {
   afterEach(function () {
@@ -45,12 +29,6 @@ describe('ReduxRouter', function () {
       subject.registerRoutes('RoutesName', routes);
 
       expect(subject.getRoutes('RoutesName')).toEqual(routes);
-    });
-  });
-
-  describe('#createRootRouter', function () {
-    it('calls syncHistoryWithStore and createElement', function () {
-      // TODO
     });
   });
 
@@ -81,20 +59,13 @@ describe('ReduxRouter', function () {
   });
 
   describe('#renderRouterToString', function () {
-    const fakeReducer = combineReducers({ routing: routerReducer });
-    const store = function (initialState) {
-      return createStore(fakeReducer, initialState);
-    };
-
     const renderRouterToString = (path) => {
       const result = subject.renderRouterToString('RoutesName', 'StoreName', path);
       return JSON.parse(result);
     };
 
     beforeEach(function () {
-      subject.registerRoutes('RoutesName', routes);
-      ReduxStore.registerStore('StoreName', store);
-      ReduxStore.mountStore('StoreName', {});
+      registerRoutesAndMountStore(subject);
     });
 
     context('when router can match location', function () {
