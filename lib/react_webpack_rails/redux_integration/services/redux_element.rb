@@ -1,6 +1,6 @@
 module ReactWebpackRails
   module ReduxIntegration
-    class Services
+    module Services
       class ReduxElement
         def initialize(integration_name, element_name, base_options, path = nil)
           @integration_name = integration_name
@@ -12,14 +12,8 @@ module ReactWebpackRails
         end
 
         def result
-          return unless server_side
+          return empty_result unless server_side
           JSON.parse(node_integration)
-        end
-
-        def payload
-          _payload = { name: element_name, storeName: store_name }
-          _payload[:path] = path if path
-          _payload
         end
 
         def options
