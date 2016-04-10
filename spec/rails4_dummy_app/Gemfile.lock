@@ -8,7 +8,7 @@ GIT
 PATH
   remote: ../..
   specs:
-    rwr-redux (0.1.0)
+    rwr-redux (0.1.1)
       react_webpack_rails (>= 0.1.0)
 
 GEM
