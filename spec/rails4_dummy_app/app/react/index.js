@@ -18,3 +18,6 @@ RWRRedux.registerContainer('CounterApp', CounterApp);
 
 import CounterRoutes from './routes';
 RWRRedux.registerRoutes('CounterRoutes', CounterRoutes);
+
+import ServerSideRoutes from './routes/ServerSideRoutes';
+RWRRedux.registerRoutes('ServerSideRoutes', ServerSideRoutes);

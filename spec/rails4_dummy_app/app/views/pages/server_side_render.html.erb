@@ -1,0 +1,9 @@
+<%= redux_store 'MyStore', { counter: @counter_initial_value }, server_side: true %>
+
+<div id="counter-app">
+  <%= redux_container 'CounterApp', server_side: true %>
+</div>
+
+<div class="counter-routes-app">
+  <%= redux_router 'ServerSideRoutes', server_side: true %>
+</div>

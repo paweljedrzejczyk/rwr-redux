@@ -9,10 +9,11 @@ import * as CounterActions from '../actions';
 export class RouterApp extends Component {
   render() {
     const { increment, incrementIfOdd, incrementAsync, decrement, counter, children } = this.props;
+    const baseRoute = this.props.route.baseRoute;
 
     return (
       <div>
-        <Link to="/redux_router/about">About</Link>
+        <Link to={`/${baseRoute}/about`}>About</Link>
 
         <Counter
           counter={counter}
