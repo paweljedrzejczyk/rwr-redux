@@ -1,5 +1,5 @@
 {
-    "uid": "rwr-node-server",
+    "uid": "rwr-node-server-uid",
     "append": true,
     "script": "node_server.js",
     "sourceDir": "./app/react"

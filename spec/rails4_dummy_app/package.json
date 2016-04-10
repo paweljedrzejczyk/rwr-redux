@@ -52,6 +52,8 @@
     "start-hot-dev": "webpack-dev-server --hot --inline --config webpack/hot-dev.config.js",
     "rwr-node-dev-server": "forever forever/development.json",
     "rwr-node-server": "forever -o log/rwr-server-out.log -e log/rwr-server-err.log forever/production.json",
+    "rwr-background-node": "forever start -o log/rwr-server-out.log -e log/rwr-server-err.log forever/production.json",
+    "rwr-stop-background-node": "forever stop rwr-node-server-uid",
     "build": "webpack -p --config webpack/production.config.js"
   },
   "license": "",

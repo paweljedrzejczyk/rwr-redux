@@ -20,7 +20,14 @@ namespace :test do
   desc 'Run rspec for rails4 application'
   task :rails4 do
     Bundler.with_clean_env do
-      sh %Q(cd spec/rails4_dummy_app && npm run build && bundle exec rspec)
+      sh %Q(
+        cd spec/rails4_dummy_app &&
+        npm run build &&
+        npm run rwr-background-node &&
+        sleep 4 &&
+        bundle exec rspec &&
+        npm run rwr-stop-background-node
+      )
     end
   end
 end
