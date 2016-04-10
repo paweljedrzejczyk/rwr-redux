@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'user_can_see_counter_component', js: true do
+feature 'redux_container page', js: true do
   before { visit redux_container_path }
 
   it 'renders counter app with the initial state from controller' do
