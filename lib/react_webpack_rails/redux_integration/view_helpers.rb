@@ -1,4 +1,5 @@
-require 'react_webpack_rails/redux_integration/services/redux_element'
+require 'react_webpack_rails/redux_integration/services/redux_container'
+require 'react_webpack_rails/redux_integration/services/redux_router'
 
 module ReactWebpackRails
   module ReduxIntegration
@@ -14,7 +15,7 @@ module ReactWebpackRails
       end
 
       def redux_container(name, options = {})
-        container = Services::ReduxElement.new('redux-container', name, options)
+        container = Services::ReduxContainer.new('redux-container', name, options)
 
         react_element('redux-container', container.payload, container.options) do
           container.result['body'].html_safe
@@ -22,7 +23,7 @@ module ReactWebpackRails
       end
 
       def redux_router(name, options = {})
-        router = Services::ReduxElement.new('redux-router', name, options, request.path)
+        router = Services::ReduxRouter.new('redux-router', name, options, request.path)
         result = handle_response_code(router.result, name, request.path)
 
         react_element('redux-router', router.payload, router.options) do
@@ -45,7 +46,7 @@ module ReactWebpackRails
         when 302
           controller.redirect_to(result['redirectUri'])
         else
-          fail ActionController::RoutingError, routing_error(name, path)
+          raise ActionController::RoutingError, routing_error(name, path)
         end
       end
 
