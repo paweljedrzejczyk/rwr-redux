@@ -82,7 +82,7 @@ If you have more than one store in a view, you can specify `store_name`:
 
 ## Usage with react-redux-router
 
-If you want to use router in your redux app, you have to only create routes component. `rwr-redux` will wrapp it with `<Router>` and `<Provider>`components, and also will sync history with store. For now, only `browserHistory` is supported.
+If you want to use router in your redux app, you have to only create routes component. `rwr-redux` will wrapp it with `<Router>` and `<Provider>`components, and also will sync history with store. Only `browserHistory` is supported.
 
 ### example routes
 `app/react/routes/index.js`
@@ -115,6 +115,29 @@ Do not forget to use `redux_store` helper.
 
 <%= redux_router 'RoutesName' %>
 ```
+
+## Server Side Rendering
+
+More info how to use server side rendering with `react_webpack_rails`: [click](https://github.com/netguru/react_webpack_rails/blob/master/docs/server_side_rendering.md)
+
+Rails routes has to be properly setup:
+
+```rb
+get '/server_side/' => 'pages#server_side'
+get '/server_side/*path' => 'pages#server_side'
+```
+
+To enable server side rendering pass `server_side: true` to helpers options:
+
+```erb
+<%= redux_store 'MyStoreName', { foo: @bar }, server_side: true %>
+
+<%= redux_container 'MyContainerName', server_side: true %>
+
+<%= redux_router 'RoutesName', server_side: true %>
+```
+
+**NOTE**: `rwr-redux` automatically handles matching, redirecting and routing errors. Redirects and 404's are passed to Rails and handled there so you will be redirect or get 404 page like in normal Rails app.
 
 ## Contributing
 ## Issues
