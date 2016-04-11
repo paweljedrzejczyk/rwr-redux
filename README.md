@@ -27,12 +27,18 @@ $ npm install --save redux react-redux rwr-redux
 First of all, you have to register your store and containers in `react/index.js`. Then you can use them in a Rails view using provided helpers.
 When page is loaded, your container component is wrapped with [`<Provider>`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) component and will have access to defined store.
 
-### register store and components in react/index.js
+
+### register integrations, store and components in `react/index.js`
+
+Register integrations:
+```js
+integrationsManager.register('redux-store', RWRRedux.storeIntegrationWrapper);
+integrationsManager.register('redux-container', RWRRedux.containerIntegrationWrapper);
+```
 
 Register store:
 
 ```js
-
 import Store from './store';
 RWRRedux.registerStore('MyStoreName', Store);
 ```
@@ -72,6 +78,42 @@ If you have more than one store in a view, you can specify `store_name`:
 
 ```erb
 <%= redux_container 'MyContainerName', store_name: 'MyStoreName' %>
+```
+
+## Usage with react-redux-router
+
+If you want to use router in your redux app, you have to only create routes component. `rwr-redux` will wrapp it with `<Router>` and `<Provider>`components, and also will sync history with store. For now, only `browserHistory` is supported.
+
+### example routes
+`app/react/routes/index.js`
+
+```js
+export default (
+  <Route path="/" component={App}>
+    <Route path="about" component={About} />
+  </Route>
+)
+```
+
+### register integration and routes in `react/index.js`
+
+```js
+integrationsManager.register('redux-router', RWRRedux.routerIntegrationWrapper);
+```
+
+```js
+import RoutesName from './routes';
+RWRRedux.registerRoutes('RoutesName', RoutesName);
+```
+
+### use registered routes in Rails view
+
+Do not forget to use `redux_store` helper.
+
+```erb
+<%= redux_store 'MyStoreName', { foo: @bar } %>
+
+<%= redux_router 'RoutesName' %>
 ```
 
 ## Contributing
