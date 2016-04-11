@@ -7,6 +7,8 @@ class ReduxStore {
     this.defaultStore = null;
 
     this.registerStore = this.registerStore.bind(this);
+    this.getStore = this.getStore.bind(this);
+    this.mountStore = this.mountStore.bind(this);
   }
 
   registerStore(name, store) {
