@@ -82,7 +82,7 @@ If you have more than one store in a view, you can specify `store_name`:
 
 ## Usage with react-redux-router
 
-If you want to use router in your redux app, you have to only create routes component. `rwr-redux` will wrap it with `<Router>` and `<Provider>`components, and also, will sync history with the store. Only `browserHistory` is supported.
+If you want to use router in your redux app, you have to only create routes component. `rwr-redux` will wrap it with `<Router>` and `<Provider>` components, and also, will sync history with the store. Only `browserHistory` is supported.
 
 ### example routes
 `app/react/routes/index.js`

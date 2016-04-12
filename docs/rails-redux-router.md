@@ -9,54 +9,42 @@ If you want check the source code right away, you can find example app [here](ht
 
 ## Setup
 
-* [react_webpack_rails](https://github.com/netguru/react_webpack_rails) and [rwr-redux](https://github.com/netguru/rwr-redux) have to be added and to your app
+* [react_webpack_rails](https://github.com/netguru/react_webpack_rails) and [rwr-redux](https://github.com/netguru/rwr-redux) have to be added to your app
 * install react-router and react-router-redux:
 ```bash
 $ npm install --save react-router react-router-redux
 ```
 
-## Main app component
+## Routes
 
-In your root component add `<Router>` component and sync history with store.
+`rwr-redux` will wrap Routes with `<Router>` and `<Provider>` components, and also, will sync browserHistory with the store.
 
-`react/containers/Root.jsx` [example](https://github.com/caspg/rails-react-examples/blob/master/redux-router/app/react/containers/Root.jsx)
-```jsx
-import React, { Component } from 'react';
+[`react/routes/index.js`](https://github.com/caspg/rails-react-examples/blob/master/redux-router/app/react/routes/index.js)
+```js
+import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import RWRRedux from 'rwr-redux';
 
-import App from './App';
-(...)
+import App from '../containers/App';
+import CounterPage from '../containers/CounterPage';
+import ScorePage from '../components/ScorePage';
+import About from '../components/About';
 
-export default class Root extends Component {
-  componentWillMount() {
-    const mountedStore = RWRRedux.getStore();
-    this.history = syncHistoryWithStore(browserHistory, mountedStore);
-  }
+export default (
+  <Route path="/" component={App}>
+    <IndexRoute component={CounterPage} />
+    <Route path="/score-board" component={ScorePage} />
+    <Route path="/about" component={About} />
+  </Route>
+);
 
-  render() {
-    return (
-      <Router history={this.history} >
-        <Route path="/" component={App}>
-          (...)
-        </Route>
-      </Router>
-    );
-  }
-}
 ```
-
-In `componentWillMount()` method, browserHistory is synced with [registered store](https://github.com/netguru/rwr-redux#register-store-and-components-in-reactindexjs). Store can be accessed by `getStore()` function provided by `rwr-redux` package.
-
-Within this component you can navigate with `<Link>` components ([example](https://github.com/caspg/rails-react-examples/blob/master/redux-router/app/react/components/TabItem.jsx#L11)).
 
 ## Store
 
 Navbar component will issue [navigation events](https://github.com/reactjs/react-router-redux#what-if-i-want-to-issue-navigation-events-via-redux-actions) via Redux actions. Those events will change state and cause main component to rerender.
 
 To make it works, you need to apply middleware to the store:
-`react/store/index.js`
+[`react/store/index.js`](https://github.com/caspg/rails-react-examples/blob/master/redux-router/app/react/store/index.js)
 ```jsx
 import { createStore, applyMiddleware } from 'redux';
 import { routerMiddleware } from 'react-router-redux'
@@ -77,7 +65,7 @@ export default function configureStore(initialState) {
 
 ## Navbar component
 
-`react/containers/Navbar.jsx` [example](https://github.com/caspg/rails-react-examples/blob/master/redux-router/app/react/containers/Navbar.jsx#L15)
+[`react/containers/Navbar.jsx`](https://github.com/caspg/rails-react-examples/blob/master/redux-router/app/react/containers/Navbar.jsx)
 
 Import `push` method from react-router-redux:
 ```jsx
@@ -88,6 +76,31 @@ And now you can dispatch an action with navigation event:
 ```jsx
 this.props.dispatch(push(path));
 ```
+
+## Register store and router
+
+[`react/index.js`](https://github.com/caspg/rails-react-examples/blob/master/redux-router/app/react/index.js)
+
+Register integrations:
+```js
+integrationsManager.register('redux-store', RWRRedux.storeIntegrationWrapper);
+integrationsManager.register('redux-container', RWRRedux.containerIntegrationWrapper);
+integrationsManager.register('redux-router', RWRRedux.routerIntegrationWrapper);
+```
+
+Register store and components:
+```js
+
+import CounterStore from './store';
+RWRRedux.registerStore('CounterStore', CounterStore);
+
+import Navbar from './containers/Navbar';
+RWRRedux.registerContainer('Navbar', Navbar);
+
+import MainRoutes from './routes';
+RWRRedux.registerRoutes('MainRoutes', MainRoutes);
+```
+
 
 ## Rails part
 
