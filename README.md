@@ -2,7 +2,7 @@ rwr-redux
 ====
 [Redux.js](http://redux.js.org/) integration plugin for [react_webpack_rails](https://github.com/netguru/react_webpack_rails).
 
-It allows you to use Redux state containers in a different part of Rails views. Thanks to this gem you can use multiple components (Redux containers) in one page. They can easily access the same store and have their state synced.
+It allows you to use Redux state containers in a different part of Rails views. Thanks to this gem you can use multiple components (Redux containers) on one page. They can easily access the same store and have their state synced.
 
 #### Guides and Examples
 * basic react redux rails example: [app](https://github.com/caspg/rails-react-examples/tree/master/basic-redux)
@@ -25,7 +25,7 @@ $ npm install --save redux react-redux rwr-redux
 ## Usage
 
 First of all, you have to register your store and containers in `react/index.js`. Then you can use them in a Rails view using provided helpers.
-When page is loaded, your container component is wrapped with [`<Provider>`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) component and will have access to defined store.
+When a page is loaded, your container component is wrapped with [`<Provider>`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) component and will have access to defined store.
 
 
 ### register integrations, store and components in `react/index.js`
@@ -82,7 +82,7 @@ If you have more than one store in a view, you can specify `store_name`:
 
 ## Usage with react-redux-router
 
-If you want to use router in your redux app, you have to only create routes component. `rwr-redux` will wrapp it with `<Router>` and `<Provider>`components, and also will sync history with store. Only `browserHistory` is supported.
+If you want to use router in your redux app, you have to only create routes component. `rwr-redux` will wrap it with `<Router>` and `<Provider>`components, and also, will sync history with the store. Only `browserHistory` is supported.
 
 ### example routes
 `app/react/routes/index.js`
@@ -137,7 +137,7 @@ To enable server side rendering pass `server_side: true` to helpers options:
 <%= redux_router 'RoutesName', server_side: true %>
 ```
 
-**NOTE**: `rwr-redux` automatically handles matching, redirecting and routing errors. Redirects and 404's are passed to Rails and handled there so you will be redirect or get 404 page like in normal Rails app.
+**NOTE**: `rwr-redux` automatically handles matching, redirecting and routing errors. Redirects and 404's are passed to Rails and handled there so you will be redirected or get 404 page like in normal Rails app.
 
 ## Contributing
 ## Issues
