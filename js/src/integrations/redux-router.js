@@ -13,6 +13,11 @@ class ReduxRouter {
     this.routes = {};
 
     this.registerRoutes = this.registerRoutes.bind(this);
+    this.getRoutes = this.getRoutes.bind(this);
+    this.createRootRouter = this.createRootRouter.bind(this);
+    this.unmountRouter = this.unmountRouter.bind(this);
+    this.renderRouter = this.renderRouter.bind(this);
+    this.renderRouterToString = this.renderRouterToString.bind(this);
   }
 
   registerRoutes(name, routes) {

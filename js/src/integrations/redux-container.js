@@ -10,6 +10,12 @@ class ReduxContainer {
     this.containers = {};
 
     this.registerContainer = this.registerContainer.bind(this);
+    this.getContainer = this.getContainer.bind(this);
+    this.createContainer = this.createContainer.bind(this);
+    this.createRootComponent = this.createRootComponent.bind(this);
+    this.renderContainer = this.renderContainer.bind(this);
+    this.unmountContainer = this.unmountContainer.bind(this);
+    this.renderContainerToString = this.renderContainerToString.bind(this);
   }
 
   registerContainer(name, container) {
