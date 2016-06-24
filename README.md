@@ -32,6 +32,8 @@ When a page is loaded, your container component is wrapped with [`<Provider>`](h
 
 Register integrations:
 ```js
+import RWR, { integrationsManager } from 'react-webpack-rails';
+
 integrationsManager.register('redux-store', RWRRedux.storeIntegrationWrapper);
 integrationsManager.register('redux-container', RWRRedux.containerIntegrationWrapper);
 ```

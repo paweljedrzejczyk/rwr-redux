@@ -83,6 +83,8 @@ this.props.dispatch(push(path));
 
 Register integrations:
 ```js
+import RWR, { integrationsManager } from 'react-webpack-rails';
+
 integrationsManager.register('redux-store', RWRRedux.storeIntegrationWrapper);
 integrationsManager.register('redux-container', RWRRedux.containerIntegrationWrapper);
 integrationsManager.register('redux-router', RWRRedux.routerIntegrationWrapper);
