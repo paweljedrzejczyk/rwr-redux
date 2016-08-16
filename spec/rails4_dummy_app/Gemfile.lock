@@ -8,7 +8,7 @@ GIT
 PATH
   remote: ../..
   specs:
-    rwr-redux (0.3.0)
+    rwr-redux (0.4.0)
       react_webpack_rails (>= 0.1.0)
 
 GEM
@@ -216,4 +216,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.11.2
+   1.12.5

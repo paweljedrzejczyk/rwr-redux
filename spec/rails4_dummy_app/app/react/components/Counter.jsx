@@ -2,8 +2,12 @@ import React, { Component, PropTypes } from 'react'
 
 class Counter extends Component {
   render() {
-    const { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props
+    const { name, increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props
     return (
+      <div>
+      <b>
+        Counter Name: {name}
+      </b>
       <p>
         Clicked: <strong>{counter}</strong> times
         {' '}
@@ -15,6 +19,7 @@ class Counter extends Component {
         {' '}
         <button onClick={() => incrementAsync()}>Increment async</button>
       </p>
+      </div>
     )
   }
 }
