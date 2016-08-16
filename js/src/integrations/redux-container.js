@@ -47,8 +47,8 @@ class ReduxContainer {
     unmountComponentAtNode(node);
   }
 
-  renderContainerToString(name, storeName) {
-    const rootComponent = this.createRootComponent(name, storeName);
+  renderContainerToString(name, payload) {
+    const rootComponent = this.createRootComponent(name, payload);
     const result = renderToString(rootComponent);
 
     return JSON.stringify({ body: result });
@@ -65,8 +65,7 @@ class ReduxContainer {
       }.bind(this),
 
       nodeRun: function _prerender(payload) {
-        const { name, storeName } = payload;
-        return this.renderContainerToString(name, storeName);
+        return this.renderContainerToString(payload.name, payload);
       }.bind(this),
     };
   }
