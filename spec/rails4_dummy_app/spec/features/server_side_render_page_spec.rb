@@ -31,17 +31,9 @@ feature 'server_side_render page', js: true do
 
     context 'when missing route' do
       it 'throws 404 RoutingError' do
-        # Below expectation returns:
-        # RSpec::Expectations::ExpectationNotMetError: expected ActionController::RoutingError but nothing was raised
-        #
-        # expect { visit server_side_render_path + '/error' }.to raise_error(ActionController::RoutingError)
-
         visit server_side_render_path + '/error'
-
-        expect(page).to have_content('Routing Error')
-        expect(page).to have_content(
-          'ReactWebpackRails::ReduxIntegration: No route found in ServerSideRoutes router for /server_side_render/error.'
-        )
+        expect { visit server_side_render_path + '/error' }.
+          to raise_error.with_message(/ReactWebpackRails::ReduxIntegration: No route found/)
       end
     end
   end
