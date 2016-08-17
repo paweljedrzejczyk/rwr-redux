@@ -26,20 +26,20 @@ class ReduxContainer {
     return this.containers[name];
   }
 
-  createContainer(name) {
+  createContainer(name, props) {
     const constructor = this.getContainer(name);
-    return createElement(constructor);
+    return createElement(constructor, props);
   }
 
-  createRootComponent(name, storeName) {
-    const container = this.createContainer(name);
+  createRootComponent(name, { props, storeName }) {
+    const container = this.createContainer(name, props);
     const store = ReduxStore.getStore(storeName);
 
     return createElement(Provider, { store }, container);
   }
 
-  renderContainer(name, node, storeName) {
-    const rootComponent = this.createRootComponent(name, storeName);
+  renderContainer(name, payload, node) {
+    const rootComponent = this.createRootComponent(name, payload);
     render(rootComponent, node);
   }
 
@@ -47,8 +47,8 @@ class ReduxContainer {
     unmountComponentAtNode(node);
   }
 
-  renderContainerToString(name, storeName) {
-    const rootComponent = this.createRootComponent(name, storeName);
+  renderContainerToString(name, payload) {
+    const rootComponent = this.createRootComponent(name, payload);
     const result = renderToString(rootComponent);
 
     return JSON.stringify({ body: result });
@@ -57,7 +57,7 @@ class ReduxContainer {
   get integrationWrapper() {
     return {
       mount: function _mount(node, payload) {
-        this.renderContainer(payload.name, node, payload.storeName);
+        this.renderContainer(payload.name, payload, node);
       }.bind(this),
 
       unmount: function _unmount(node) {
@@ -65,8 +65,7 @@ class ReduxContainer {
       }.bind(this),
 
       nodeRun: function _prerender(payload) {
-        const { name, storeName } = payload;
-        return this.renderContainerToString(name, storeName);
+        return this.renderContainerToString(payload.name, payload);
       }.bind(this),
     };
   }

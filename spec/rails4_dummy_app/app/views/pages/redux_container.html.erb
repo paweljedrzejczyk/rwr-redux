@@ -2,7 +2,7 @@
 <%= redux_container 'DevTools', store_name: 'MyStore' %>
 
 <div id="first-counter-app">
-  <%= redux_container 'CounterApp', store_name: 'MyStore' %>
+  <%= redux_container 'CounterApp', props: { name: 'My Counter' }, store_name: 'MyStore' %>
 </div>
 
 <div id="second-counter-app">

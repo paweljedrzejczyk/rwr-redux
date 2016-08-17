@@ -57,7 +57,7 @@ describe('ReduxContainer', function () {
   describe('#createContainer', function () {
     it('creates redux container', function () {
       subject.registerContainer('AppContainer', AppContainer);
-      const container = subject.createContainer('AppContainer');
+      const container = subject.createContainer('AppContainer', { points: 2 });
 
       expect(React.isValidElement(container)).toBe(true);
       expect(container.type).toBe(AppContainer);
@@ -67,11 +67,18 @@ describe('ReduxContainer', function () {
   describe('#createRootComponent', function () {
     it('creates redux root component', function () {
       const initialState = { fake: 'state' };
+      const payload = {
+        name: 'ContainerName',
+        props: { points: 2 },
+        storeName: 'StoreName',
+      };
+
       ReduxStore.registerStore('StoreName', store);
       ReduxStore.mountStore('StoreName', initialState);
 
       subject.registerContainer('AppContainer', AppContainer);
-      const rootComponent = subject.createRootComponent('AppContainer', 'ValidStore');
+      const rootComponent = subject.createRootComponent(
+          payload.name, payload);
 
       expect(React.isValidElement(rootComponent)).toBe(true);
     });
@@ -81,11 +88,16 @@ describe('ReduxContainer', function () {
     it('calls #createRootComponent and ReactDOM.render functions', function () {
       const subjectSpy = spyOn(subject, 'createRootComponent');
       const reactSpy = spyOn(ReactDOM, 'render');
+      const payload = {
+        name: 'ContainerName',
+        props: { points: 2 },
+        storeName: 'StoreName',
+      };
 
-      subject.renderContainer('ContainerName', 'node', 'StoreName');
+      subject.renderContainer(payload.name, payload, 'node');
 
       expect(subjectSpy.calls.length).toEqual(1);
-      expect(subjectSpy).toHaveBeenCalledWith('ContainerName', 'StoreName');
+      expect(subjectSpy).toHaveBeenCalledWith(payload.name, payload);
       expect(reactSpy.calls.length).toEqual(1);
     });
   });
@@ -106,11 +118,16 @@ describe('ReduxContainer', function () {
     it('calls #createRootComponent and ReactDOM.renderToString', function () {
       const subjectSpy = spyOn(subject, 'createRootComponent');
       const reactSpy = spyOn(ReactDOMServer, 'renderToString');
+      const payload = {
+        name: 'ContainerName',
+        props: { points: 2 },
+        storeName: 'StoreName',
+      };
 
-      subject.renderContainerToString('ContainerName', 'StoreName');
+      subject.renderContainerToString(payload.name, payload);
 
       expect(subjectSpy.calls.length).toEqual(1);
-      expect(subjectSpy).toHaveBeenCalledWith('ContainerName', 'StoreName');
+      expect(subjectSpy).toHaveBeenCalledWith(payload.name, payload);
       expect(reactSpy.calls.length).toEqual(1);
     });
 
@@ -128,7 +145,11 @@ describe('ReduxContainer', function () {
 
   describe('#integrationWrapper', function () {
     const node = { nodeType: 1, nodeName: 'DIV' };
-    const payload = { name: 'ContainerName', storeName: 'StoreName' };
+    const payload = {
+      name: 'ContainerName',
+      props: { points: 2 },
+      storeName: 'StoreName',
+    };
 
     describe('mount', function () {
       it('calls #renderContainer', function () {
@@ -136,7 +157,7 @@ describe('ReduxContainer', function () {
         subject.integrationWrapper.mount(node, payload);
 
         expect(mountSpy.calls.length).toEqual(1);
-        expect(mountSpy).toHaveBeenCalledWith(payload.name, node, payload.storeName);
+        expect(mountSpy).toHaveBeenCalledWith(payload.name, payload, node);
       });
     });
 
@@ -156,7 +177,7 @@ describe('ReduxContainer', function () {
         subject.integrationWrapper.nodeRun(payload);
 
         expect(nodeRunSpy.calls.length).toEqual(1);
-        expect(nodeRunSpy).toHaveBeenCalledWith(payload.name, payload.storeName);
+        expect(nodeRunSpy).toHaveBeenCalledWith(payload.name, payload);
       });
     });
   });

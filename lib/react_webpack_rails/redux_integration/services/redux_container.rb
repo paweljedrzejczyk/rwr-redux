@@ -9,7 +9,7 @@ module ReactWebpackRails
         end
 
         def payload
-          { name: element_name, storeName: store_name }
+          { name: element_name, props: props, storeName: store_name }
         end
 
         def options

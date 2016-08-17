@@ -12,12 +12,12 @@ describe ReactWebpackRails::ReduxIntegration::Services::ReduxContainer do
   let(:integration_name) { 'redux-container' }
   let(:server_side)      { true }
 
-  let(:options) { { server_side: server_side, store_name: store_name, foo: 'bar' } }
+  let(:options) { { server_side: server_side, props: { foo: 'bar' }, store_name: store_name, foo: 'bar' } }
 
   let(:node_runner_class) { ReactWebpackRails::NodeIntegrationRunner }
   let(:redux_container)   { described_class.new(integration_name, container_name, options) }
 
-  let(:expected_payload)  { { name: container_name, storeName: store_name } }
+  let(:expected_payload)  { { name: container_name, props: { foo: 'bar' }, storeName: store_name } }
 
   describe '#result' do
     context 'when server_side: true' do
