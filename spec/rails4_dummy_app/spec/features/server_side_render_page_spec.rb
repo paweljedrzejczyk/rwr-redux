@@ -16,7 +16,7 @@ feature 'server_side_render page', js: true do
 
       it 'renders sub route' do
         expect(current_path).to eq('/server_side_render/about')
-        expect(page).to have_content('Clicked: 33 times', count: 2)
+        expect(page).to have_content('Clicked: 34 times', count: 2)
         expect(page).to have_content('About component inside RouterApp')
       end
     end
