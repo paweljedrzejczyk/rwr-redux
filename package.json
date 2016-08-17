@@ -31,9 +31,9 @@
   "homepage": "https://github.com/netguru/rwr-redux",
   "dependencies": {
     "react-redux": "^4.4.5",
-    "react-router": "^2.4.1",
-    "react-router-redux": "^4.0.4",
-    "react-webpack-rails": "^0.4.1",
+    "react-router": "^2.6.1",
+    "react-router-redux": "^4.0.5",
+    "react-webpack-rails": "^0.5.0",
     "redux": "^3.5.2"
   },
   "devDependencies": {
