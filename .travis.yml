@@ -30,7 +30,7 @@ before_script:
   - 'export CHROME_BIN=chromium-browser'
   - "export DISPLAY=:99.0" # Setup display for selenium driver
   - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
+  - sleep 4 # give xvfb some time to start
 
 script:
   - bundle exec rake test:$TEST_SUITE
