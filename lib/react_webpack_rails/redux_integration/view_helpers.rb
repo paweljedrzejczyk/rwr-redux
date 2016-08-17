@@ -11,13 +11,13 @@ module ReactWebpackRails
           NodeIntegrationRunner.new('redux-store', name: name, props: props).run
         end
 
-        react_element('redux-store', { name: name, props: props }, options)
+        rwr_element('redux-store', { name: name, props: props }, options)
       end
 
       def redux_container(name, options = {})
         container = Services::ReduxContainer.new('redux-container', name, options)
 
-        react_element('redux-container', container.payload, container.options) do
+        rwr_element('redux-container', container.payload, container.options) do
           container.result['body'].html_safe
         end
       end
@@ -26,7 +26,7 @@ module ReactWebpackRails
         router = Services::ReduxRouter.new('redux-router', name, options, request.path)
         result = handle_response_code(router.result, name, request.path)
 
-        react_element('redux-router', router.payload, router.options) do
+        rwr_element('redux-router', router.payload, router.options) do
           result
         end
       end

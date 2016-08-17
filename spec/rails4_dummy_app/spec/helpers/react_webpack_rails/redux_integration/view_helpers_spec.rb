@@ -7,8 +7,8 @@ describe ReactWebpackRails::ReduxIntegration::ViewHelpers, type: :helper do
 
     it { expect(helper).to respond_to(:redux_store) }
 
-    it 'calls #react_element with proper params' do
-      expect(helper).to receive(:react_element).with(*store_args, {}).once
+    it 'calls #rwr_element with proper params' do
+      expect(helper).to receive(:rwr_element).with(*store_args, {}).once
 
       helper.redux_store('StoreName', foo: 'bar')
     end
@@ -16,7 +16,7 @@ describe ReactWebpackRails::ReduxIntegration::ViewHelpers, type: :helper do
     context 'when props are not passed' do
       it 'sets an empty hash as a default' do
         expect(helper)
-          .to receive(:react_element)
+          .to receive(:rwr_element)
           .with('redux-store', { name: 'StoreName', props: {} }, {})
           .once
 
@@ -56,8 +56,8 @@ describe ReactWebpackRails::ReduxIntegration::ViewHelpers, type: :helper do
         helper.redux_store('StoreName', { foo: 'bar' }, server_side: true)
       end
 
-      it 'calls #react_element with proper params' do
-        expect(helper).to receive(:react_element).with(*store_args, {}).once
+      it 'calls #rwr_element with proper params' do
+        expect(helper).to receive(:rwr_element).with(*store_args, {}).once
 
         helper.redux_store('StoreName', { foo: 'bar' }, server_side: true)
       end
@@ -84,8 +84,8 @@ describe ReactWebpackRails::ReduxIntegration::ViewHelpers, type: :helper do
 
     it { expect(helper).to respond_to(:redux_container) }
 
-    it 'calls #react_element with proper params' do
-      expect(helper).to receive(:react_element).with(*container_arguments) do |_, &block|
+    it 'calls #rwr_element with proper params' do
+      expect(helper).to receive(:rwr_element).with(*container_arguments) do |_, &block|
         expect(block.call).to eq(result['body'].html_safe)
       end
 
@@ -117,8 +117,8 @@ describe ReactWebpackRails::ReduxIntegration::ViewHelpers, type: :helper do
     context 'when result code is 200' do
       let(:status_code) { 200 }
 
-      it 'calls #react_element with proper params' do
-        expect(helper).to receive(:react_element).with(*router_arguments) do |_, &block|
+      it 'calls #rwr_element with proper params' do
+        expect(helper).to receive(:rwr_element).with(*router_arguments) do |_, &block|
           expect(block.call).to eq(result['body'].html_safe)
         end
 
