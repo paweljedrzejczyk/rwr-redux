@@ -46,7 +46,7 @@ module ReactWebpackRails
         when 302
           controller.redirect_to(result['redirectUri'])
         else
-          raise ActionController::RoutingError, routing_error(name, path)
+          raise ActionController::RoutingError.new(routing_error(name, path))
         end
       end
 
