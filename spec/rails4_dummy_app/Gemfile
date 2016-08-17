@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
 gem 'sqlite3'
-gem 'react_webpack_rails', git: 'git@github.com:netguru/react_webpack_rails.git'
+gem 'react_webpack_rails'
 gem 'rwr-redux', path: '../..'
 
 gem 'active_model_serializers'
