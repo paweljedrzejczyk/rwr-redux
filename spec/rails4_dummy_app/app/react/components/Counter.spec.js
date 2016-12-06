@@ -15,7 +15,7 @@ describe('Counter component', () => {
         incrementAsync={jest.fn}
         decrement={jest.fn}
         counter={0}
-      />
+      />,
     );
 
     expect(component.find('[data-test="counter-name"]')).to.exist;
@@ -36,13 +36,13 @@ describe('Counter component', () => {
         decrement={jest.fn}
         counter={0}
         name={sampleName}
-      />
+      />,
     );
 
     expect(
-      component.find('[data-test="counter-name"]').text()
+      component.find('[data-test="counter-name"]').text(),
     ).to.equal(
-      `Counter Name: ${sampleName}`
+      `Counter Name: ${sampleName}`,
     );
   });
 
@@ -54,13 +54,13 @@ describe('Counter component', () => {
         incrementAsync={jest.fn}
         decrement={jest.fn}
         counter={0}
-      />
+      />,
     );
 
     expect(
-      component.find('[data-test="counter-name"]').text()
+      component.find('[data-test="counter-name"]').text(),
     ).to.equal(
-      `Counter Name: no name :(`
+      'Counter Name: no name :(',
     );
   });
 
@@ -73,13 +73,13 @@ describe('Counter component', () => {
         incrementAsync={jest.fn}
         decrement={jest.fn}
         counter={counterValue}
-      />
+      />,
     );
 
     expect(
-      component.find('[data-test="counter"]').text()
+      component.find('[data-test="counter"]').text(),
     ).to.equal(
-      `${counterValue}`
+      `${counterValue}`,
     );
   });
 
@@ -96,7 +96,7 @@ describe('Counter component', () => {
         incrementAsync={incrementAsyncFnSpy}
         decrement={decrementFnSpy}
         counter={0}
-      />
+      />,
     );
 
     const incrementBtn = component.find('[data-test="increment-btn"]');

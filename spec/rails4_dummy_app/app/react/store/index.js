@@ -11,8 +11,8 @@ export default function configureStore(initialState) {
     initialState,
     compose(
       applyMiddleware(thunk, createLogger()),
-      DevTools.instrument()
-    )
+      DevTools.instrument(),
+    ),
   );
 
   if (module.hot) {

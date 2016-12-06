@@ -13,11 +13,11 @@ describe('RouterApp container', () => {
         route={{
           baseRoute: 'redux_router',
         }}
-      />
+      />,
     );
 
     expect(
-      container.find('Connect(Counter)')
+      container.find('Connect(Counter)'),
     ).to.exist;
   });
 
@@ -33,11 +33,11 @@ describe('RouterApp container', () => {
         }}
       >
         {children}
-      </RouterApp>
+      </RouterApp>,
     );
 
     expect(
-      container.find('[data-test="test-children"]')
+      container.find('[data-test="test-children"]'),
     ).to.exist;
   });
 
@@ -47,11 +47,11 @@ describe('RouterApp container', () => {
         route={{
           baseRoute: 'redux_router',
         }}
-      />
+      />,
     );
 
     expect(
-      container.find('Link[to="/redux_router/about"]')
+      container.find('Link[to="/redux_router/about"]'),
     ).to.exist;
   });
 });

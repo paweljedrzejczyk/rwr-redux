@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const Counter = (props) => (
+const Counter = props => (
   <div>
     <b data-test="counter-name">
       Counter Name: {props.name || 'no name :('}

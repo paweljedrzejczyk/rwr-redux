@@ -9,7 +9,7 @@ chai.use(chaiEnzyme());
 describe('About component', () => {
   it('renders About component', () => {
     const component = shallow(
-      <About />
+      <About />,
     );
 
     expect(component.find('[data-test="about-text"]')).to.exist;

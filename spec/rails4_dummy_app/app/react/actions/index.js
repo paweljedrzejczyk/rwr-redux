@@ -18,9 +18,9 @@ export const incrementIfOdd = () => (dispatch, getState) => {
 
 export const incrementAsync = (delay = 1000) => dispatch => (
 	new Promise((resolve, reject) => {
-		setTimeout(() => {
+  setTimeout(() => {
 	    dispatch(increment());
 	    resolve();
 	  }, delay);
-	})
+})
 );

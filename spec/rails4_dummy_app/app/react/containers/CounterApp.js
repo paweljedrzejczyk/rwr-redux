@@ -5,7 +5,7 @@ import * as CounterActions from 'actions';
 
 export default connect(
 	state => ({
-		counter: state.counter,
-	}),
-	dispatch => bindActionCreators(CounterActions, dispatch)
+  counter: state.counter,
+}),
+	dispatch => bindActionCreators(CounterActions, dispatch),
 )(Counter);

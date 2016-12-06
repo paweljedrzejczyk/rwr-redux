@@ -21,17 +21,17 @@ describe('CounterApp container', () => {
     const container = shallow(
       <CounterApp
         store={store}
-      />
+      />,
     );
 
     expect(
-      container.props().counter
+      container.props().counter,
     ).to.equal(
-      counterValue
+      counterValue,
     );
 
     expect(
-      container.props()
+      container.props(),
     ).to.contain.all.keys([
       'increment',
       'incrementIfOdd',
