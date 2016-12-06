@@ -31,9 +31,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.js.jsx'],
-    modulesDirectories: [
-      path.resolve('./app/react'),
-    ],
+    modulesDirectories: ['node_modules', path.resolve('./app/react')],
   },
   plugins: [
     new ExtractTextPlugin('../stylesheets/react_bundle.css', {
