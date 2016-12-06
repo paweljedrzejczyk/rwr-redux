@@ -45,6 +45,7 @@ Counter.propTypes = {
   incrementAsync: PropTypes.func.isRequired,
   decrement: PropTypes.func.isRequired,
   counter: PropTypes.number.isRequired,
+  name: PropTypes.string,
 };
 
 export default Counter;

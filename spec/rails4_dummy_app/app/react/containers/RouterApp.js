@@ -1,32 +1,23 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 import CounterApp from 'containers/CounterApp';
-import * as CounterActions from 'actions';
 
-export class RouterApp extends Component {
-  render() {
-    const {
-      children,
-    } = this.props;
-    const baseRoute = this.props.route.baseRoute;
+const RouterApp = ({ children, route: { baseRoute } }) => (
+  <div>
+    <Link to={`/${baseRoute}/about`}>About</Link>
 
-    return (
-      <div>
-        <Link to={`/${baseRoute}/about`}>About</Link>
+    <CounterApp />
 
-        <CounterApp />
-
-        {children}
-      </div>
-    );
-  }
-}
+    {children}
+  </div>
+);
 
 RouterApp.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.shape({}),
+  route: PropTypes.shape({
+    baseRoute: PropTypes.string,
+  }).isRequired,
 };
 
 export default RouterApp;

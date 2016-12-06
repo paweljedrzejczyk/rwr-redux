@@ -1,8 +1,8 @@
 import React from 'react';
-import About from './About';
 import { shallow } from 'enzyme';
 import chai, { expect } from 'chai';
 import chaiEnzyme from 'chai-enzyme';
+import About from './About';
 
 chai.use(chaiEnzyme());
 

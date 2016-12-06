@@ -1,0 +1,12 @@
+# Don't run eslint on specs
+**/*.spec.js
+
+# Don't run eslint on webpack configs
+webpack.config.js
+webpack/*.js
+
+# Don't run eslint on Rails JS entrypoint
+app/assets/javascripts/application.js
+
+# Don't run eslint on node server
+app/react/node_server.js

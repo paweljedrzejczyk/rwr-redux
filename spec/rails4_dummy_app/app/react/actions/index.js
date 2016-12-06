@@ -17,10 +17,10 @@ export const incrementIfOdd = () => (dispatch, getState) => {
 };
 
 export const incrementAsync = (delay = 1000) => dispatch => (
-	new Promise((resolve, reject) => {
-  setTimeout(() => {
-	    dispatch(increment());
-	    resolve();
-	  }, delay);
-})
+  new Promise((resolve) => {
+    setTimeout(() => {
+      dispatch(increment());
+      resolve();
+    }, delay);
+  })
 );
