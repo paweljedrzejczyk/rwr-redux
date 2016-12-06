@@ -10,3 +10,6 @@ app/assets/javascripts/application.js
 
 # Don't run eslint on node server
 app/react/node_server.js
+
+# Don't run eslint on compiled JS Bundle
+app/assets/javascripts/react_bundle.js

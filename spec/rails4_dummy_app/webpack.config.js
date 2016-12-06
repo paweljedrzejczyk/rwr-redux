@@ -1,12 +1,16 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
+const reactPath = path.join(__dirname, 'app/react');
+const indexFile = path.join(reactPath, 'index.js');
+const outputPath = path.join(__dirname, 'app/assets/javascripts');
+
 module.exports = {
   entry: {
-    main: ['./app/react/index.js'],
+    main: [indexFile],
   },
   output: {
-    path: `${__dirname}/app/assets/javascripts`,
+    path: outputPath,
     filename: 'react_bundle.js',
   },
   module: {
@@ -31,7 +35,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.js.jsx'],
-    modulesDirectories: ['node_modules', path.resolve('./app/react')],
+    modulesDirectories: ['node_modules', reactPath],
   },
   plugins: [
     new ExtractTextPlugin('../stylesheets/react_bundle.css', {
