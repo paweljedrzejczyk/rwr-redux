@@ -1,20 +1,40 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 const Counter = (props) => (
   <div>
-    <b>
+    <b data-test="counter-name">
       Counter Name: {props.name || 'no name :('}
     </b>
     <p>
-      Clicked: <strong>{props.counter}</strong> times
+      Clicked: <strong data-test="counter">{props.counter}</strong> times
       {' '}
-      <button onClick={props.increment}>+</button>
+      <button
+        data-test="increment-btn"
+        onClick={props.increment}
+      >
+        +
+      </button>
       {' '}
-      <button onClick={props.decrement}>-</button>
+      <button
+        data-test="decrement-btn"
+        onClick={props.decrement}
+      >
+        -
+      </button>
       {' '}
-      <button onClick={props.incrementIfOdd}>Increment if odd</button>
+      <button
+        data-test="incrementIfOdd-btn"
+        onClick={props.incrementIfOdd}
+      >
+        Increment if odd
+      </button>
       {' '}
-      <button onClick={props.incrementAsync}>Increment async</button>
+      <button
+        data-test="incrementAsync-btn"
+        onClick={props.incrementAsync}
+      >
+        Increment async
+      </button>
     </p>
   </div>
 );

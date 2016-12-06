@@ -29,7 +29,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.js.jsx']
+    extensions: ['', '.js', '.jsx', '.js.jsx'],
+    root: [
+      path.resolve('./app/react'),
+    ],
   },
   plugins: [
     new ExtractTextPlugin('../stylesheets/react_bundle.css', {

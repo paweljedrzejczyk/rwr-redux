@@ -1,3 +1,3 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default () => <p>About component inside RouterApp</p>;
+export default () => <p data-test="about-text">About component inside RouterApp</p>;
