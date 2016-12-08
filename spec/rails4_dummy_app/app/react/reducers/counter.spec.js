@@ -20,4 +20,14 @@ describe('counter reducer', () => {
       reducer(undefined, { type: types.DECREMENT_COUNTER }),
     ).to.deep.equal(-1);
   });
+
+  it('sets the counter on GET_COUNTER_SUCCESS action', () => {
+    const counter = 1337;
+    expect(
+      reducer(undefined, {
+        type: types.GET_COUNTER_SUCCESS,
+        counter,
+      })
+    ).to.deep.equal(counter);
+  });
 });

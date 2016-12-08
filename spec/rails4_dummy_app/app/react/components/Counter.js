@@ -35,6 +35,13 @@ const Counter = props => (
       >
         Increment async
       </button>
+      {' '}
+      <button
+        data-test="getCounter-btn"
+        onClick={props.getCounter}
+      >
+        Get remote counter value
+      </button>
     </p>
   </div>
 );
@@ -44,6 +51,7 @@ Counter.propTypes = {
   incrementIfOdd: PropTypes.func.isRequired,
   incrementAsync: PropTypes.func.isRequired,
   decrement: PropTypes.func.isRequired,
+  getCounter: PropTypes.func.isRequired,
   counter: PropTypes.number.isRequired,
   name: PropTypes.string,
 };

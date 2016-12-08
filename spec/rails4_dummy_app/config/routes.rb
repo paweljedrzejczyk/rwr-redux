@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   get 'server_side_render', to: 'pages#server_side_render'
   get 'server_side_render/*path', to: 'pages#server_side_render'
+
+  get 'api/counter', to: 'api#counter'
 end

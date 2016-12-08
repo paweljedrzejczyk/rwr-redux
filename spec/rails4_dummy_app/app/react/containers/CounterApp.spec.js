@@ -37,6 +37,7 @@ describe('CounterApp container', () => {
       'incrementIfOdd',
       'incrementAsync',
       'decrement',
+      'getCounter',
       'counter',
     ]);
   });

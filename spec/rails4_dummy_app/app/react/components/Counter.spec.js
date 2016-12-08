@@ -14,6 +14,7 @@ describe('Counter component', () => {
         incrementIfOdd={jest.fn}
         incrementAsync={jest.fn}
         decrement={jest.fn}
+        getCounter={jest.fn}
         counter={0}
       />,
     );
@@ -24,6 +25,7 @@ describe('Counter component', () => {
     expect(component.find('[data-test="decrement-btn"]')).to.exist;
     expect(component.find('[data-test="incrementIfOdd-btn"]')).to.exist;
     expect(component.find('[data-test="incrementAsync-btn"]')).to.exist;
+    expect(component.find('[data-test="getCounter-btn"]')).to.exist;
   });
 
   it('renders passed counter name', () => {
@@ -34,6 +36,7 @@ describe('Counter component', () => {
         incrementIfOdd={jest.fn}
         incrementAsync={jest.fn}
         decrement={jest.fn}
+        getCounter={jest.fn}
         counter={0}
         name={sampleName}
       />,
@@ -53,6 +56,7 @@ describe('Counter component', () => {
         incrementIfOdd={jest.fn}
         incrementAsync={jest.fn}
         decrement={jest.fn}
+        getCounter={jest.fn}
         counter={0}
       />,
     );
@@ -72,6 +76,7 @@ describe('Counter component', () => {
         incrementIfOdd={jest.fn}
         incrementAsync={jest.fn}
         decrement={jest.fn}
+        getCounter={jest.fn}
         counter={counterValue}
       />,
     );
@@ -88,6 +93,7 @@ describe('Counter component', () => {
     const incrementIfOddFnSpy = jest.fn();
     const incrementAsyncFnSpy = jest.fn();
     const decrementFnSpy = jest.fn();
+    const getCounterFnSpy = jest.fn();
 
     const component = shallow(
       <Counter
@@ -95,6 +101,7 @@ describe('Counter component', () => {
         incrementIfOdd={incrementIfOddFnSpy}
         incrementAsync={incrementAsyncFnSpy}
         decrement={decrementFnSpy}
+        getCounter={getCounterFnSpy}
         counter={0}
       />,
     );
@@ -114,5 +121,9 @@ describe('Counter component', () => {
     const incrementAsyncBtn = component.find('[data-test="incrementAsync-btn"]');
     incrementAsyncBtn.simulate('click');
     expect(incrementAsyncFnSpy.mock.calls.length).to.equal(1);
+
+    const getCounterBtn = component.find('[data-test="getCounter-btn"]');
+    getCounterBtn.simulate('click');
+    expect(getCounterFnSpy.mock.calls.length).to.equal(1);
   });
 });
