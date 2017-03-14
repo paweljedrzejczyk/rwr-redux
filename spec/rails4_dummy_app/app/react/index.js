@@ -1,7 +1,6 @@
 import RWR, { integrationsManager } from 'react-webpack-rails';
 import RWRRedux from 'rwr-redux';
 
-import RWR from 'react-webpack-rails';
 RWR.run();
 
 integrationsManager.register('redux-store', RWRRedux.storeIntegrationWrapper);
