@@ -11,19 +11,14 @@ module.exports = {
   module: {
     loaders: [
       {
-        key: 'js',
+        key: 'jsx',
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
-        loader: 'babel'
+        loaders: ['babel']
       },
       {
-        key: 'scss',
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css!sass')
-      },
-      {
-        key: 'css',
-        test: /\.css$/,
+        key: 'style',
+        test: /\.s?css$/,
         loader: ExtractTextPlugin.extract('css!sass')
       }
     ]

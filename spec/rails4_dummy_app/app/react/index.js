@@ -1,6 +1,7 @@
 import RWR, { integrationsManager } from 'react-webpack-rails';
 import RWRRedux from 'rwr-redux';
 
+import RWR from 'react-webpack-rails';
 RWR.run();
 
 integrationsManager.register('redux-store', RWRRedux.storeIntegrationWrapper);
@@ -21,3 +22,5 @@ RWRRedux.registerRoutes('CounterRoutes', CounterRoutes);
 
 import ServerSideRoutes from './routes/ServerSideRoutes';
 RWRRedux.registerRoutes('ServerSideRoutes', ServerSideRoutes);
+import HelloWorld from './components/hello-world';
+RWR.registerComponent('HelloWorld', HelloWorld);
