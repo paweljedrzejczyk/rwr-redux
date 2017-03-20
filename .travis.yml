@@ -11,10 +11,6 @@ addons:
     packages:
       - google-chrome-stable
 
-language: node_js
-node_js:
-  - "7"
-
 language: ruby
 
 cache:
@@ -38,6 +34,8 @@ before_install:
   - sudo apt-get update -qq
 
 before_script:
+  - nvm install 4.1
+  - nvm use 4.1
   - npm install -g npm@^2.0
   - npm install -g webpack@^1.12.1
   - bundle exec rake setup:$TEST_SUITE
