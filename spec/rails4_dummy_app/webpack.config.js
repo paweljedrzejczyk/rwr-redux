@@ -11,20 +11,18 @@ module.exports = {
   module: {
     loaders: [
       {
-        key: 'jsx',
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
         loaders: ['babel']
       },
       {
-        key: 'style',
         test: /\.s?css$/,
         loader: ExtractTextPlugin.extract('css!sass')
       }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.js.jsx']
+    extensions: ['.js', '.jsx', '.js.jsx']
   },
   plugins: [
     new ExtractTextPlugin({ filename: '../stylesheets/react_bundle.css', allChunks: true })
