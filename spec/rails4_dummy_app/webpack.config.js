@@ -27,8 +27,6 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.js.jsx']
   },
   plugins: [
-    new ExtractTextPlugin({ '../stylesheets/react_bundle.css', 
-      allChunks: true
-    })
+    new ExtractTextPlugin({ filename: '../stylesheets/react_bundle.css', allChunks: true })
   ]
 };
